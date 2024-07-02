@@ -11,4 +11,7 @@ public interface DirectoryRepository extends JpaRepository<Directory, Long>, Dir
 
     @Query("SELECT d FROM Directory d WHERE d.user.userId = :userId AND d.title = 'trash_directory'")
     Optional<Directory> findTrashDirectoryByUser(Long userId);
+
+    @Query("SELECT d FROM Directory d WHERE d.user.userId = :userId AND d.title = 'storage_directory'")
+    Optional<Directory> findStorageDirectoryByUser(Long userId);
 }

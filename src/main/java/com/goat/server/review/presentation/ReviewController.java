@@ -1,8 +1,8 @@
 package com.goat.server.review.presentation;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.goat.server.global.dto.ResponseTemplate;
 import com.goat.server.review.application.ReviewService;
+import com.goat.server.review.dto.request.ReviewMoveRequest;
 import com.goat.server.review.dto.request.ReviewUpdateRequest;
 import com.goat.server.review.dto.request.ReviewUploadRequest;
 import com.goat.server.review.dto.response.ReviewDetailResponse;
@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import static com.goat.server.global.dto.ResponseTemplate.EMPTY_RESPONSE;
 
 @Tag(name = "ReviewController", description = "ReviewController 관련 API")
 @Slf4j
@@ -94,6 +92,45 @@ public class ReviewController {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(EMPTY_RESPONSE);
+                .body(ResponseTemplate.EMPTY_RESPONSE);
     }
+
+    @Operation(summary = "복습 자료를 창고로 보내기", description = "복습 자료를 복습창고로 이동")
+    @PatchMapping("/directory/storage/{reviewId}")
+    public ResponseEntity<ResponseTemplate<Object>> moveReviewToStorage(
+            @AuthenticationPrincipal Long userId,
+            @PathVariable Long reviewId) {
+
+        reviewService.moveReviewToStorage(userId, reviewId);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseTemplate.EMPTY_RESPONSE);
+    }
+
+    @Operation(summary = "복습 자료를 휴지통으로 보내기", description = "복습 자료를 휴지통으로 이동")
+    @PatchMapping("/directory/trashcan/{reviewId}")
+    public ResponseEntity<ResponseTemplate<Object>> moveReviewToTrashCan(
+            @AuthenticationPrincipal Long userId,
+            @PathVariable Long reviewId) {
+
+        reviewService.moveReviewToTrashCan(userId, reviewId);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseTemplate.EMPTY_RESPONSE);
+    }
+
+    @Operation(summary = "복습 자료를 다른 폴더로 이동", description = "복습 자료를 다른 폴더로 이동")
+    @PatchMapping("/directory/review/move")
+    public ResponseEntity<ResponseTemplate<Object>> moveReviewDirectory(
+            @RequestBody ReviewMoveRequest request) {
+
+        reviewService.moveReviewDirectory(request);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseTemplate.EMPTY_RESPONSE);
+    }
+
 }

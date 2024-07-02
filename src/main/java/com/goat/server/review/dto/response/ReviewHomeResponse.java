@@ -12,7 +12,7 @@ public record ReviewHomeResponse(
     public static ReviewHomeResponse from(Review review) {
         return ReviewHomeResponse.builder()
                 .reviewId(review.getId())
-                .imageUrl(review.getImageInfo().getImageUrl())
+                .imageUrl(review.getImageUrl())
                 .build();
     }
 }

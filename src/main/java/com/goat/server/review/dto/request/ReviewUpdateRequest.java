@@ -1,7 +1,6 @@
 package com.goat.server.review.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 
 import java.time.LocalDate;
@@ -12,10 +11,11 @@ import java.util.List;
 public record ReviewUpdateRequest(
         String title,
         String content,
+        Long directoryId,
         Boolean repeat,
         Boolean autoRepeat,
         List<String> reviewDates,
-        LocalTime remindTime,
+        @Schema(example = "15:00", type = "string") LocalTime remindTime,
         LocalDate reviewStartDate,
         LocalDate reviewEndDate,
         Boolean postShare

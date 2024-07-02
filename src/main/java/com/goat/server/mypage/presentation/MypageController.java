@@ -18,7 +18,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import static com.goat.server.global.dto.ResponseTemplate.EMPTY_RESPONSE;
 
 @Tag(name = "MypageController", description = "MypageController 관련 API")
 @Slf4j

@@ -95,7 +95,7 @@ public class Review extends BaseTimeEntity {
         this.isPostShare = isPostShare;
         this.directory = directory;
         this.user = user;
-        this.reviewCnt = reviewCnt;
+        this.reviewCnt = (reviewCnt != null) ? reviewCnt : 0L;
     }
 
     public void setImageInfo(ImageInfo imageInfo){
@@ -152,6 +152,18 @@ public class Review extends BaseTimeEntity {
     }
 
     public String getImageUrl() {
-        return this.imageInfo.getImageUrl();
+        if (this.imageInfo == null) {
+            return "default-image-url";
+        } else {
+            return this.imageInfo.getImageUrl();
+        }
+    }
+
+    public void updateDirectory(Directory directory){
+        this.directory = directory;
+    }
+
+    public void resetReviewCnt() {
+        this.reviewCnt = 0L;
     }
 }

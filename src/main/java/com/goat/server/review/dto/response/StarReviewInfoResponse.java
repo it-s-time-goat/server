@@ -7,13 +7,15 @@ import lombok.Builder;
 public record StarReviewInfoResponse(
         Long reviewId,
         String imageUrl,
-        String title
+        String title,
+        String directoryName
 ) {
     public static StarReviewInfoResponse from(Review review){
         return StarReviewInfoResponse.builder()
                 .reviewId(review.getId())
                 .imageUrl(review.getImageUrl())
                 .title(review.getTitle())
+                .directoryName(review.getDirectory().getTitle())
                 .build();
     }
 }

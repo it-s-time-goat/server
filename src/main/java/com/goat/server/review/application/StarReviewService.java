@@ -6,9 +6,7 @@ import com.goat.server.mypage.exception.errorcode.MypageErrorCode;
 import com.goat.server.mypage.repository.UserRepository;
 import com.goat.server.review.domain.Review;
 import com.goat.server.review.domain.StarReview;
-import com.goat.server.review.dto.response.ReviewHomeResponse;
 import com.goat.server.review.dto.response.StarReviewInfoResponse;
-import com.goat.server.review.dto.response.StarReviewResponse;
 import com.goat.server.review.dto.response.StarReviewResponseList;
 import com.goat.server.review.exception.ReviewNotFoundException;
 import com.goat.server.review.exception.errorcode.ReviewErrorCode;
@@ -23,9 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Transactional(readOnly = true)
@@ -37,7 +33,7 @@ public class StarReviewService {
     private final ReviewRepository reviewRepository;
     private final StarReviewRepository starReviewRepository;
 
-    private static final int PAGE_SIZE_STAR_REVIEW = 3;
+    private static final int PAGE_SIZE_STAR_REVIEW = 2;
 
     /**
      * 즐겨찾기 추가 및 삭제

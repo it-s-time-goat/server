@@ -12,15 +12,17 @@ public record MypageHomeResponse (
         String nickname,
         Grade grade,
         String goal,
+        Long totalReviewCnt,
         List<String> majorList
 ) {
-    public static MypageHomeResponse of(User user, List<String> majorNames) {
+    public static MypageHomeResponse of(User user, List<String> majorNames, Long totalReviewCnt) {
         return MypageHomeResponse.builder()
                 .imageUrl(user.getProfileImageUrl())
                 .nickname(user.getNickname())
                 .grade(user.getGrade())
                 .goal(user.getGoal())
                 .majorList(majorNames)
+                .totalReviewCnt(totalReviewCnt)
                 .build();
     }
 }

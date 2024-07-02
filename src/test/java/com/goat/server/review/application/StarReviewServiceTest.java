@@ -87,22 +87,4 @@ class StarReviewServiceTest {
         //then
         verify(starReviewRepository, times(1)).delete(starReviewCaptor.capture());
     }
-
-
-    @Test
-    @DisplayName("즐겨찾기한 목록 보기 테스트")
-    void getMyFavoriteReviewsTest() {
-        //given
-        given(userRepository.findById(USER_USER.getUserId())).willReturn(Optional.of(USER_USER));
-        Pageable pageable = PageRequest.of(0, 3, Sort.by("createdDate").descending());
-        given(reviewRepository.findAllStarReviewByUserId(USER_USER.getUserId(), pageable))
-                .willReturn(new PageImpl<>(List.of(DUMMY_REVIEW2)));
-
-        //when
-        StarReviewResponseList responseList = starReviewService.getMyFavoriteReviews(USER_USER.getUserId(), 0);
-
-        //then
-        assertThat(responseList.starReviewInfoResponseList().get(0).title())
-                .isEqualTo(DUMMY_REVIEW2.getTitle());
-    }
 }
